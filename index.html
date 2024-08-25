@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .merah {
+            color: red;
+        }
+        
+        .biru {
+            color: blue;
+        }
+        
+        .lokasi {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .lokasi li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            margin: 10px;
+            width: calc(33.33% - 20px);
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .lokasi li:hover {
+            background-color: #ddd;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #3e8e41;
+        }
+        
+        #toggleBanyumas {
+            margin-top: 20px;
+        }
+        
+        .Cilongok {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MANIPILASI ADD</h1>
+        <ul class="lokasi">
+            <li class="Bandung">Bandung</li>
+            <li class="jakarta">Jakarta</li>
+            <li class="surabaya">Surabaya</li>
+            <li class="malang"><strong>Malang</strong></li>
+            <li class="remove">Hapus</li>
+            <li class="clear">Clear</li>
+            <li class="Bannyuwangi">Banyuwangi Event Handler 
+                <button id="keBanyuwangi">Pergi!</button>
+                <button id="hapusBanyuwangi">X</button>
+            </li>
+
+            <li class="Banyumas">Banyumas Fitur Effect <button id="hideBanyumas">Hide</button></li>
+            <li><input type="text" class="inputan" value="NTT"></li>
+            <br>
+            <button id="toggleBanyumas">Toggle Banyumas</button>
+
+            <li class="Cilongok">Cilongok Manipulasi CSS</li>
+            <button id="gantiCilongokJadiBiru">JADI BIRU!</button>
+            <button id="gantiCilongokJadiMerah">JADI MERAH!</button>
+            <button id="gantiCilongokJadiBesar">JADI BESAR!</button>
+            <button id="gantiCilongokJadiKecil">JADI KECIL!</button>
+        </ul>
+    </div>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script>
+    $(document).ready(function()
+    {
+        // Membuat elemen <li> baru dengan teks "Yogyakarta".
+        var jogja=$('<li>Yogyakarta <em>(prependTo)</em></li>');
+        // Membuat elemen <li> baru dengan teks "Bali".
+        var bali=$('<li>Bali <em>(appendTo)</em> </li>');
+        // Membuat elemen <h2> baru dengan teks "Pilih Tujuan Anda".
+        var subjudul=$('<h2>Pilih Tujuan Anda <em>(insertBefore)</em></h2>');
+        // Membuat elemen <h3> baru dengan teks "Terima Kasih".
+        var penutup=$('<h3>Terima Kasih <em>(insertAfter)</em></h3>');
+        // Menambahkan elemen "Yogyakarta" di awal daftar ul dengan kelas lokasi.
+        jogja.prependTo($('.lokasi'));
+        // menambahkan elemen "Bali" di akhir daftar,
+        bali.appendTo($('.lokasi'));	
+        // Menyisipkan subjudul "Pilih Tujuan Anda" sebelum daftar ul.
+        subjudul.insertBefore($('.lokasi'));	
+        // Menyisipkan penutup "Terima Kasih" setelah daftar ul.
+        penutup.insertAfter($('.lokasi'));
+
+        // GET
+        // Mengembalikan konten teks dari elemen yang dipilih.
+        console.log($('.surabaya').text());
+        // Mengembalikan konten elemen yang dipilih
+        console.log($('.malang').html());
+        // Mengembalikan value pada form.
+        console.log($('.inputan').val());
+
+        // SET
+        // class bandung akan diatur menjadi Cimahi
+        $('.Bandung').text('Cimahi');
+        //  class surabaya akan diatur menjadi Surabaya dengan mennyertakan markup html
+        $('.Surabaya').html('<em>Surabaya</em>');
+        // serta class inputan akan diatur menjadi Semarang.
+        $('.inputan').val('Semarang');
+
+        // Remove
+        // Menghapus elemen dan elemen didalamnya (child)
+        $('.remove').remove();
+        // Menghapus elemen di dalamnya saja (child)
+        $('.clear').empty();
+
+        // Event Handler
+        $('#keBanyuwangi').on('click', function() {
+            alert('Saya suka ke Banyuwangi!');
+        })
+        $('#hapusBanyuwangi').on('click', function() {
+            $('.Banyuwangi').remove();
+            alert('Banyuwangi Dihapus');
+        })
+
+        // Fitur Effect
+        $('#hideBanyumas').on('click', function() {
+            $('.Banyumas').hide(2000);
+        })
+        $('#toggleBanyumas').on('click', function() {
+            $('.Banyumas').animate({
+                marginLeft: 200
+            });
+        })
+
+        // Manipulasi CSS
+        $('#gantiCilongokJadiBiru').on('click', function() {
+            $('.Cilongok').removeClass('merah');
+            $('.Cilongok').addClass('biru');  
+        });
+
+        $('#gantiCilongokJadiMerah').on('click', function() {
+            $('.Cilongok').removeClass('biru');
+            $('.Cilongok').addClass('merah');  
+        });
+
+        $('#gantiCilongokJadiBesar').on('click', function() {
+            $('.Cilongok').css({
+                fontSize: '100px'
+            });
+        });
+        $('#gantiCilongokJadiKecil').on('click', function() {
+            $('.Cilongok').css({
+                fontSize: '20px'
+            });
+        });
+    });
+    </script>
+</body>
+</html>
